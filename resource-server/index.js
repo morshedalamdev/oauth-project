@@ -7,6 +7,7 @@ app.use(express.json());
 const ISSUER = "http://localhost:3000";
 const AUDIENCE = "demo-client";
 const JWKS_URL = new URL("http://localhost:3000/.well-known/jwks.json");
+const PORT = 6000;
 
 const JWKS = createRemoteJWKSet(JWKS_URL);
 
@@ -59,6 +60,11 @@ app.get("/api/profile", requireAuth, requireScope("api.read"), (req, res) => {
   });
 });
 
-app.listen(6000, () => {
-  console.log("Resource Server running on http://localhost:6000");
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error(`Failed to start resource server: ${err.message}`);
+    process.exit(1);
+  }
+
+  console.log(`Resource Server running on http://localhost:${PORT}`);
 });

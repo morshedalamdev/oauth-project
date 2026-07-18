@@ -11,6 +11,7 @@ const RESOURCE_SERVER = "http://localhost:6000";
 
 const CLIENT_ID = "demo-client";
 const REDIRECT_URI = "http://localhost:4000/callback";
+const PORT = 4000;
 
 // Helpers
 function base64url(input) {
@@ -149,6 +150,11 @@ app.get("/refresh", async (req, res) => {
   `);
 });
 
-app.listen(4000, () => {
-  console.log("Client App running on http://localhost:4000");
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error(`Failed to start client app: ${err.message}`);
+    process.exit(1);
+  }
+
+  console.log(`Client App running on http://localhost:${PORT}`);
 });

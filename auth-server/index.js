@@ -24,6 +24,7 @@ const PUBLIC_KEY_PEM = fs.readFileSync("./public.pem", "utf8");
 
 const ISSUER = "http://localhost:3000";
 const KEY_ID = "demo-key-1";
+const PORT = 3000;
 
 function base64url(input) {
   return input
@@ -213,6 +214,11 @@ app.get("/.well-known/jwks.json", async (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log("Auth Server running on http://localhost:3000");
+app.listen(PORT, (err) => {
+  if (err) {
+    console.error(`Failed to start auth server: ${err.message}`);
+    process.exit(1);
+  }
+
+  console.log(`Auth Server running on http://localhost:${PORT}`);
 });
