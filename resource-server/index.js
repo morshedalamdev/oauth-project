@@ -61,6 +61,6 @@ app.get("/api/profile", requireAuth, requireScope("api.read"), (req, res) => {
   });
 });
 
-app.listen(5000, () => {
+app.listen(6000, () => {
   console.log("Resource server running on http://localhost:5000");
 });
